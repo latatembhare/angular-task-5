@@ -1,0 +1,119 @@
+<div class="center-content mt-5">
+  <mat-card class="example-card">
+       <mat-card-content>
+      <mat-tab-group>
+        <mat-tab label="Login" class="mr-5">
+          <form class="example-form" (submit)="onLogin()" >
+           
+            <mat-form-field class="example-full-width">
+              <mat-label>Username</mat-label>
+              <input type="text"  name="username" matInput #username  [ngClass]="{
+                'border border-danger':
+                  (httpErrMsg &&
+                    httpErrMsg != 'MISSING_EMAIL' &&
+                    httpErrMsg != 'INVALID_EMAIL' &&
+                    httpErrMsg != 'INVALID_EMAIL') ||
+                  (httpErrMsg &&
+                    httpErrMsg != 'MISSING_EMAIL' &&
+                    httpErrMsg != 'INVALID_EMAIL')
+              }" />
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <mat-label>Password</mat-label>
+              <input [ngClass]="{
+                'border border-danger':
+                  httpErrMsg &&
+                  httpErrMsg !== 'MISSING_PASSWORD' &&
+                  !httpErrMsg.includes('WEAK_PASSWORD')
+              }"
+              name="password"
+                type="password"
+                matInput
+                #password
+              />
+            </mat-form-field>
+            <button type="submit" mat-raised-button color="primary btn-block">Login</button>
+          </form>
+        </mat-tab>
+        <!-- register form -->
+        <mat-tab label="Register">
+          <form class="example-form" (submit)="onSignUp(registerForm.value)" #registerForm="ngForm">
+            <mat-radio-group [(ngModel)]="selectedOption" name="user">
+              <mat-radio-button *ngFor="let user of usernames" [value]="user" >{{user}}</mat-radio-button>
+            </mat-radio-group>
+            <mat-form-field class="example-full-width">
+              <mat-label>Firstname</mat-label>
+              <input
+            ngModel
+             name="firstname"
+                type="text"
+                matInput
+                value="firstname"
+                required=""
+              />
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-label>Lastname</mat-label>
+              <input
+               ngModel
+              name="lastname"
+                type="text"
+                matInput
+                value="lastname"
+                required=""
+              />
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-label>Email</mat-label>
+              <input type="email" matInput name="email"   ngModel value="email" required=""/>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-label>Contact</mat-label>
+              <input
+               ngModel
+              name="contact"
+                type="text"
+                matInput
+                value="contact"
+                required=""
+              />
+            </mat-form-field>
+            <h4>Department</h4>
+            <mat-form-field>
+              <mat-label>sales</mat-label>
+              <mat-select  [(ngModel)]="selectedValue" name="dept">
+                @for (food of dept; track food) {
+                <mat-option [value]="food.value">{{
+                  food.viewValue
+                }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-label>Username</mat-label>
+              <input
+               ngModel
+              name="username"
+                type="text"
+                matInput
+                required=""
+              />
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-label>Password</mat-label>
+              <input
+               ngModel
+              name="password"
+                type="password"
+                matInput  
+                email=""             
+              />
+            </mat-form-field>
+            <button type="submit" mat-raised-button color="primary btn-block">Register</button>
+          </form>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+</div>

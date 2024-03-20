@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div
+      class="text-center mt-5 col-4 example-card"
+      *ngFor="let std of allData; index as i"
+    >
+      <form>
+        <mat-card class>
+          <mat-card-content>
+            <h2 class="text-info">Name:{{ std?.name |titlecase }}</h2>
+            <h2 class="text-info">
+              Leave from: {{ std?.startdate | date }}
+            </h2>
+            <h2 class="text-info">To: {{ std?.enddate | date }}</h2>
+            <h2 class="text-info">No of Days: {{ 3  }}</h2>
+            <h2 class="text-info">Reason: {{ std?.reason |titlecase }}</h2>
+            <button type="button" *ngIf="std.status !== 'approved' && std.status !== 'rejected'" 
+              mat-raised-button
+              color="primary"
+              class="mx-4 mb-2"
+              (click)="approveRequest(std.id)"
+            >
+              Approve
+            </button>
+            <button *ngIf="std.status !== 'approved' && std.status !== 'rejected'" 
+              mat-raised-button
+              color="warn"
+              class="mx-4"
+              (click)="rejectRequest(std.id)"
+            >
+              Reject
+            </button>
+            <i *ngIf="std.status === 'approved'" class="fa fa-check text-success" > <h1>Approved</h1> </i>
+            <i *ngIf="std.status === 'rejected'" class="fa fa-times text-danger"><h1>Rejected</h1> </i>
+          </mat-card-content>
+        </mat-card>
+      </form>
+    </div>
+  </div>
+</div>
