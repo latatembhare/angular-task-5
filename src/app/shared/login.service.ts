@@ -1,32 +1,34 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from './user.service';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  public httpError$ = new Subject();
-
   isLogged: boolean = false;
-  userRole: any;
+  user: any;
+  Staff: any;
+  staffFullname = new BehaviorSubject(null)
   constructor(private router: Router, private userServ: UserService) {}
-  Login(username: string, password: string) {
+  Login(email: string, password: string) {
     let user = this.userServ.allUser.find(
-      (u) => u.username == username && u.password == password
+      (u) => u.email == email && u.password == password
     );
     // console.log(user.user);
     if (user === undefined) {
-      this.isLogged = false; 
+      this.isLogged = false;
     } else {
-      this.isLogged = true;
-      return user;
+        this.isLogged = true;
+        return user;
     }
-   
   }
-  getUserRole() {
-    return this.userRole;
+  logout(): void {
+    this.isLogged = false;
+  }
+  isLoggedIn(): boolean {
+    return this.isLogged;
   }
 }

@@ -10,9 +10,9 @@ import { LoginService } from '../shared/login.service';
 export class DashboardComponent implements OnInit {
   userRole: any;
   constructor(private userServ: UserService,private loginServ:LoginService) {}
-  ngOnInit(): void {
-    this.userRole = this.loginServ.getUserRole()
-    console.log(this.userRole)
+  ngOnInit() {
+    // this.userRole = this.loginServ.getUserRole()
+    // console.log(this.userRole)
     
   }
 }
