@@ -1,0 +1,22 @@
+// .active{
+//     border-bottom: 2px solid green;
+//     border-radius: 5px;
+// }
+// // a{
+// //     text-decoration: none;
+// // }
+.nav-link {
+    /* Your default link styles */
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .active {
+    /* Styles for active link */
+    font-weight: bold;
+    color: #007bff; /* You can use your desired active link color */    
+//   border-radius: 13px; /* Add rounded corners */
+//   border-bottom: 4px solid green;
+  transition: background-color 0.3s ease-in-out;
+  }
+  

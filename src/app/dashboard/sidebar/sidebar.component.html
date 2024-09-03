@@ -1,0 +1,9 @@
+<mat-nav-list class="mat-list">
+    <mat-list-item *ngFor="let item of menuItems" class="list-item">
+      <mat-icon>{{ item.icon }}</mat-icon>
+      <span class="name">{{  item.name}}</span>
+    </mat-list-item>
+  </mat-nav-list>
+  <mat-icon class="log-out">power_settings_new</mat-icon>
+  <button mat-button class="log-out">
+    Log out</button>

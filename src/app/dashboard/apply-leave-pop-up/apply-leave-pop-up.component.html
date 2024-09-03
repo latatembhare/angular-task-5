@@ -1,14 +1,11 @@
-<div class=".example-card mt-5">
+<div class="example-card mt-5">
   <form [formGroup]="myStdForm" (submit)="onSubmit(myStdForm.value)">
 <mat-card class="example-card">
     <mat-card-content>
         <p>Leave Details</p>
-        <input type="text" class="mb-5 py-3 example-full-width" placeholder="Enter Name" formControlName="name">
-
+        <!-- <input type="text" class="mb-5 py-3 example-full-width" placeholder="Enter Name" formControlName="name" required=""> -->
         <mat-form-field class="example-full-width">
-
             <mat-label>Enter a date range</mat-label>
-
             <mat-date-range-input [rangePicker]="picker" >
               <input matStartDate placeholder="Start date" formControlName="startdate">
               <input matEndDate placeholder="End date" formControlName="enddate">
@@ -23,8 +20,8 @@
           </mat-form-field>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button  mat-raised-button color="primary">Cancel</button>
-      <button type="submit" mat-button  mat-raised-button color="warn" class="mx-4">Submit</button>
+      <button mat-button  mat-raised-button color="warn"  type="button" (click)="cancel()" >Cancel</button>
+      <button type="submit" mat-button  mat-raised-button  color="primary" class="mx-4 btn" [disabled]="!myStdForm.touched || !myStdForm.valid">Submit</button>
     </mat-card-actions>
   </mat-card>
   </form>

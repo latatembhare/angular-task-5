@@ -1,44 +1,80 @@
-<div class="container center-content">
+<ng-container>
+  <div class="text-center mt-3" *ngIf="staffName.length === 0">
+    <h1 class="text-danger top ">Not applied any leave yet</h1>
+
+    <button
+      mat-raised-button
+      color="primary mb-2 mt-5"
+      routerLink="/dashBoard/leavePopUp"
+    >
+      Apply Leave
+    </button>
+  </div>
+</ng-container>
+
+<div class="container center-content" *ngIf="staffName.length !== 0">
   <div class="row">
-    <div class="col-4">
-      <h2 class="text-info text-center mt-5">
-        Total leave {{ totalLeaves }}
+    <div class="col-sm-4 mt-5">
+      <h2 class="text-dark text-center ">
+        <span class="text-size"> {{ totalLeaves}}</span>
+
+        <p class="text-color mt-2">Total leave</p> 
       </h2>
     </div>
-    <div class="col-4">
-      <h2 class="text-info text-center mt-5">Approve: {{approvedLeaves }}</h2>
+    <div class="col-sm-3">
+      <h2 class="text-dark text-center mt-5">
+       <span class="text-size"> {{ approvedLeaves }}</span>
+        <p class="text-color mt-2">Approved</p>
+      </h2>
     </div>
-    <div class="col-4">
-      <h2 class="text-info text-center mt-5">Reject: {{ rejectedLeaves}}</h2>
+    <div class="col-sm-3">
+      <h2 class="text-dark text-center mt-5">
+        <span class="text-size"> {{ rejectedLeaves }}</span>
+
+        <p class="text-color mt-2">Rejected</p> 
+      </h2>
     </div>
-      <button 
+    <div>
+      <button
         mat-raised-button
-        color="primary mb-2"
+        color="primary mb-2 mt-5"
         routerLink="/dashBoard/leavePopUp"
       >
-        Apply leave
+       Apply Leave
       </button>
+    </div>
   </div>
 </div>
-<div class="container">
+
+<div>
+ <div class="container">
   <div class="row">
     <div
       class="text-center mt-3 col-4 example-card"
-      *ngFor="let std of allData; index as i"
+      *ngFor="let std of staffName; index as i"
     >
       <form>
-        <mat-card class>
-          <mat-card-content>
-            <h2 class="text-info">
-              Leave from: {{ std?.startdate | date }}
+        <mat-card class="mat-card">
+          <mat-card-content class="details">
+            <h2 class="text-dark">
+              <span class="text-color">Leave from:</span>
+              {{ std?.startdate | date }}
             </h2>
-            <h2 class="text-info">To: {{ std?.enddate | date }}</h2>
-            <!-- <h2 class="text-info">No of Days: {{ 3  }}</h2> -->
-            <h2 class="text-info">Reason: {{ std?.reason |titlecase }}</h2>
-            <h2 class="text-info">Status: {{ std.status |titlecase }}</h2>
+            <h2 class="text-dark">
+              <span class="text-color">To:</span> {{ std?.enddate | date }}
+            </h2>
+            <h2 class="text-dark">
+              <span class="text-color">Reason:</span>
+              {{ std?.reason | titlecase }}
+            </h2>
+            <h2 class="text-dark">
+              <span class="text-color">Status:</span>
+              {{ std.status | titlecase }}
+            </h2>
           </mat-card-content>
         </mat-card>
       </form>
     </div>
   </div>
+</div>
 </div>

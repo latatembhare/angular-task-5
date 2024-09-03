@@ -1,12 +1,42 @@
-.center-content{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
   .example-card {
     max-width: 400px;
+    margin-top: 20px;
   }
-  button{
-    margin-left: 300px;
+  .mat-card{
+    display: flex;
+    flex-direction: column;
+   
+  }
+  .details {
+    margin-bottom: 10px;
+  }
+  .text-color{
+    font-size: 20px;
+    font-weight: bold;
+    color:darkgreen;
+  }
+  // .abcd{
+  //   text-align: center;
+  //   margin-left: 80px;
+  //    margin-right: 80px;
+  // }
+  // .one{
+  //   font-weight: bold;
+  //   color: black;
+  // }
+  // .two{
+  //   font-weight: bolder;
+  //   font-size: 20px;
+  //   color: rgb(118, 115, 115);
+  // }
+  // .primary{
+  //   margin-right: 140px;
+  // }
+  .text-size{
+    font-size: 30px;
+    font-weight: 800;
+  }
+  .top{
+    margin-top: 180px;
   }

@@ -1,84 +1,132 @@
 <div class="center-content mt-5">
   <mat-card class="example-card">
-       <mat-card-content>
+    
+    <mat-card-content>
+      <!-- <button type="submit" mat-raised-button color="primary ">
+        HOD
+      </button>
+      <button type="click" mat-raised-button color="primary " class="ml-5" (click)="setStaff()">
+        STAFF
+      </button> -->
       <mat-tab-group>
         <mat-tab label="Login" class="mr-5">
-          <form class="example-form" (submit)="onLogin()" >
-           
+          <form class="example-form" (submit)="onLogin()">
             <mat-form-field class="example-full-width">
               <mat-label>Username</mat-label>
-              <input type="text"  name="username" matInput #username  [ngClass]="{
-                'border border-danger':
-                  (httpErrMsg &&
-                    httpErrMsg != 'MISSING_EMAIL' &&
-                    httpErrMsg != 'INVALID_EMAIL' &&
-                    httpErrMsg != 'INVALID_EMAIL') ||
-                  (httpErrMsg &&
-                    httpErrMsg != 'MISSING_EMAIL' &&
-                    httpErrMsg != 'INVALID_EMAIL')
-              }" />
+              <input type="text" name="username" matInput #username required />
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
               <mat-label>Password</mat-label>
-              <input [ngClass]="{
-                'border border-danger':
-                  httpErrMsg &&
-                  httpErrMsg !== 'MISSING_PASSWORD' &&
-                  !httpErrMsg.includes('WEAK_PASSWORD')
-              }"
-              name="password"
+              <input
+                name="password"
                 type="password"
                 matInput
                 #password
+                required=""
               />
             </mat-form-field>
-            <button type="submit" mat-raised-button color="primary btn-block">Login</button>
+            <button type="submit" mat-raised-button color="primary btn-block">
+              Login
+            </button>
           </form>
         </mat-tab>
         <!-- register form -->
         <mat-tab label="Register">
-          <form class="example-form" (submit)="onSignUp(registerForm.value)" #registerForm="ngForm">
-            <mat-radio-group [(ngModel)]="selectedOption" name="user">
-              <mat-radio-button *ngFor="let user of usernames" [value]="user" >{{user}}</mat-radio-button>
-            </mat-radio-group>
+          <form
+            class="example-form"
+            (submit)="onSignUp(registerForm.value)"
+            #registerForm="ngForm"
+          >
+          <mat-radio-group [(ngModel)]="selectedOption" name="user">
+            <mat-radio-button *ngFor="let user of usernames" [value]="user" >{{user}}</mat-radio-button>
+          </mat-radio-group>
             <mat-form-field class="example-full-width">
               <mat-label>Firstname</mat-label>
               <input
-            ngModel
-             name="firstname"
+                ngModel
+                #firstName="ngModel"
+                name="firstname"
                 type="text"
                 matInput
                 value="firstname"
                 required=""
               />
             </mat-form-field>
+            <span
+              class="text text-danger"
+              *ngIf="
+                (!firstName.valid && lastName.touched) ||
+                (registerForm.submitted &&
+                  registerForm.touched &&
+                  !registerForm.valid &&
+                  !firstName.valid)
+              "
+              >firstname is required</span
+            >
+
             <mat-form-field class="example-full-width">
               <mat-label>Lastname</mat-label>
               <input
-               ngModel
-              name="lastname"
+                ngModel
+                #lastName="ngModel"
+                name="lastname"
                 type="text"
                 matInput
                 value="lastname"
                 required=""
               />
             </mat-form-field>
+            <span
+              class="text text-danger"
+              *ngIf="
+                (!lastName.valid && lastName.touched) ||
+                (registerForm.submitted &&
+                  registerForm.touched &&
+                  !registerForm.valid &&
+                  !lastName.valid)
+              "
+              >lastname is required</span
+            >
             <mat-form-field class="example-full-width">
-              <mat-label>Email</mat-label>
-              <input type="email" matInput name="email"   ngModel value="email" required=""/>
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-              <mat-label>Contact</mat-label>
+              <mat-label>Username</mat-label>
               <input
                ngModel
-              name="contact"
+              name="username"
                 type="text"
                 matInput
-                value="contact"
                 required=""
               />
             </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-label>Email</mat-label>
+              <input
+                type="email"
+                matInput
+                name="email"
+                ngModel
+                value="email"
+                #myEmailControl="ngModel"
+                required
+                email
+              />
+            </mat-form-field>
+            <span
+              class="text text-danger"
+              *ngIf="
+                (!myEmailControl.valid && myEmailControl.touched) ||
+                (registerForm.submitted &&
+                  !registerForm.valid &&
+                  !myEmailControl.valid)
+              "
+            >
+              <ng-container *ngIf="myEmailControl.errors?.['required']"
+                >Email is required</ng-container
+              >
+              <ng-container *ngIf="myEmailControl.errors?.['email']"
+                >Email is not valid</ng-container
+              ></span
+            >
             <h4>Department</h4>
             <mat-form-field>
               <mat-label>sales</mat-label>
@@ -91,26 +139,81 @@
               </mat-select>
             </mat-form-field>
             <mat-form-field class="example-full-width">
-              <mat-label>Username</mat-label>
+              <mat-label>Contact</mat-label>
               <input
-               ngModel
-              name="username"
+                #contactDetail="ngModel"
+                name="contact"
                 type="text"
                 matInput
+                value="contact"
                 required=""
+                maxlength="10"
+                minlength="10"
+                [(ngModel)]="dynamicNumberDiff"
               />
             </mat-form-field>
+            <span
+              class="text text-danger"
+              *ngIf="
+                (!contactDetail.valid && contactDetail.touched) ||
+                (registerForm.submitted &&
+                  !registerForm.valid &&
+                  registerForm.touched &&
+                  !contactDetail.valid)
+              "
+            >
+              <ng-container *ngIf="contactDetail.errors?.['required']"
+                >contact number is required</ng-container
+              >
+              <ng-container *ngIf="contactDetail.errors?.['minlength']"
+                >contact number should be {{ minlength }} digits and insert <
+                {{ minlength - contactDetail.errors?.['minlength'].actualLength }}
+                > more numbers</ng-container
+              >
+            </span>
+            
+            
             <mat-form-field class="example-full-width">
               <mat-label>Password</mat-label>
-              <input
-               ngModel
-              name="password"
+              <input 
+                #pss="ngModel"
+                ngModel
+                name="password"
                 type="password"
-                matInput  
-                email=""             
+                matInput
+                required=""
+                minlength="8"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
               />
             </mat-form-field>
-            <button type="submit" mat-raised-button color="primary btn-block">Register</button>
+            <span
+              class="text text-danger"
+              *ngIf="
+                (!pss.valid && pss.touched) ||
+                (registerForm.submitted &&
+                  !registerForm.valid &&
+                  registerForm.touched &&
+                  !pss.valid)
+              "
+            >
+              <ng-container *ngIf="pss.errors?.['required']"
+                >Password is required</ng-container
+              >
+              <ng-container *ngIf="pss.errors?.['minlength']"
+                >Password should be 8 character</ng-container
+              >
+              <ng-container *ngIf="pss.errors?.['pattern']">
+                Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.
+              </ng-container>
+            </span>
+            <button
+              type="submit"
+              mat-raised-button
+              color="primary btn-block"
+              [disabled]="!registerForm.touched || !registerForm.valid"
+            >
+              Register
+            </button>
           </form>
         </mat-tab>
       </mat-tab-group>

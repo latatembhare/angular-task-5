@@ -18,5 +18,5 @@ export class UserService {
     this.allUser = data;
     console.log(this.allUser);
   }
-  
+ 
  }

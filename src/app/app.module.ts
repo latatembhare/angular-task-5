@@ -6,11 +6,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatRadioModule} from '@angular/material/radio';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatRadioModule } from '@angular/material/radio';
 import { AppRoutingModule } from './app-routing.module';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -22,7 +23,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApplyLeavePopUpComponent } from './dashboard/apply-leave-pop-up/apply-leave-pop-up.component';
 import { AplliedLeaveComponent } from './dashboard/apllied-leave/apllied-leave.component';
 import { HodPageTwoComponent } from './dashboard/hod-page-two/hod-page-two.component';
-
+import { ToastrModule } from 'ngx-toastr';
+import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
+import {MatListModule} from '@angular/material/list';
+import {MatToolbarModule} from '@angular/material/toolbar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +38,7 @@ import { HodPageTwoComponent } from './dashboard/hod-page-two/hod-page-two.compo
     ApplyLeavePopUpComponent,
     AplliedLeaveComponent,
     HodPageTwoComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,12 +46,21 @@ import { HodPageTwoComponent } from './dashboard/hod-page-two/hod-page-two.compo
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
     MatCardModule,
     MatTabsModule,
     MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatButtonModule,MatIconModule,MatDividerModule,MatRadioModule,MatDatepickerModule,MatNativeDateModule
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatListModule,
+    MatToolbarModule
   ],
   providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],

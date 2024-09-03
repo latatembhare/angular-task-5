@@ -22,7 +22,11 @@
   }
   form{
     overflow: hidden;
-  }.mat-mdc-radio-button ~ .mat-mdc-radio-button {
+  }
+  .mat-mdc-radio-button ~ .mat-mdc-radio-button {
     margin-left: 16px;
   }
   
+button{
+    cursor: not-allowed;
+}

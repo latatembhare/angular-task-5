@@ -11,56 +11,55 @@ import { HttpService } from '../../shared/http.service';
 export class HodPageTwoComponent implements OnInit {
   private subcription: any;
   allData: any[] = [];
-  status: any[]=[];
+  status: any[] = [];
   updateLeaveStatus: any;
-  constructor(private userServ: UserService, private httpServ: HttpService) {}
-  ngOnInit(): void {
+  storedDept: any;
+  dataArray2: any;
+  deptName: any[] = [];
+  storedLeaveDetails: any;
+  dataArray: any;
+  constructor(private userServ: UserService, private httpServ: HttpService) {
+    this.getAllData();
+  }
+  ngOnInit() {
+    this.getAllData();
+    this.storedDept = localStorage.getItem('dept');
+    this.dataArray2 = this.storedDept.replace(/^"|"$/g, '');
+    console.log(this.dataArray2);
     this.getAllData();
   }
   getAllData() {
     this.httpServ.getData().subscribe({
       next: (param: any) => {
         this.allData = param;
-        console.log(param);
+        this.deptName = this.allData.filter(
+          (status) => status.dept === this.dataArray2
+        );
+        console.log(this.deptName);
       },
     });
   }
   approveRequest(id: string) {
     this.httpServ.updateLeaveStatus(id, 'approved').subscribe(
       (res) => {
-        console.log(res)},
-      (error) => {
-        console.error('Error updating leave status', error);
-      }
-    );
-  }
-  // approveRequest(id: any): void {
-  //   console.log(this.allData)
-  //   const request = this.allData.find(req => req.id === id);
-  //   console.log(request)
-  //   if (request) {
-  //     request.status = 'Approved';
-  //   }
-  //   console.log(request.status)
-  //   console.log(request)
-  // }
-  // rejectRequest(id:any): void {
-  //   const request = this.allData.find(req => req.id === id);
-  //   console.log(request)
-  //   if (request) {
-  //     request.status = 'Rejected';
-  //   }
-  //   console.log(request.status)
-  // }
-  rejectRequest(leaveId: string) {
-    this.httpServ.updateLeaveStatus(leaveId, 'rejected').subscribe(
-      (res) => {
+        this.getAllData()
         console.log(res);
-        // Success message or handle UI updates
       },
       (error) => {
         console.error('Error updating leave status', error);
       }
     );
   }
+  rejectRequest(leaveId: string) {
+    this.httpServ.updateLeaveStatus(leaveId, 'rejected').subscribe(
+      (res) => {
+        console.log(res);
+        this.getAllData()
+      },
+      (error) => {
+        console.error('Error updating leave status', error);
+      }
+    );
+  }
+  
 }

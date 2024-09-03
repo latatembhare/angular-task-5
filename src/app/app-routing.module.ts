@@ -14,8 +14,7 @@ const routes: Routes = [
     children: [
       { path: 'aplliedLeave', component: AplliedLeaveComponent },
       { path: 'leavePopUp', component: ApplyLeavePopUpComponent },
-
-      {path:'hod-page-two',component:HodPageTwoComponent}
+      { path: 'hod-page-two', component: HodPageTwoComponent },
     ],
   },
 ];
